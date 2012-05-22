@@ -1,0 +1,30 @@
+render = function(image) 
+camera = Camera(Vector3(0.0,0.0,-30.0), Vector3(0.0,0.0,0.0), 0.01, 500.0, 55.0); 
+camera:SetImage(image); 
+
+scene = Scene(); 
+sphere1 = Sphere(Vector3(-3,-7,2), 3); 
+sphere2 = Sphere(Vector3(3,-7, -3), 3); 
+sphere3 = Sphere(Vector3(-4,-7,-6), 3); 
+mat = ReflectiveMaterial(); 
+mat2 = RefractiveMaterial(0.41); 
+mat3 = DiffuseMaterial(Color(0.1,0.1,0.1), Color(1,1,1), Color(1,1,1), 15, 0.9);
+--mat3:SetTexture(Texture('earth.png'));
+sphere1:SetMaterial(mat); 
+sphere2:SetMaterial(mat2); 
+sphere3:SetMaterial(mat2);
+
+
+--scene:AddLight(AreaLight(Vector3(0, 4.5, 0), Vector2(4,4), Color(0.8, 0.8, 0.8),
+ --Vector3(1.0,0.1,0.0), 3)); 
+
+scene:AddLight(PointLight(Vector3(0, 4.5, 0), Color(0.9,0.9,0.9), Vector3(1,0.1,0.00))); 
+--scene:AddLight(PointLight(Vector3(-4, 8, 0), Color(0.5,0.5, 0.8), Vector3(1,0.0,0))); 
+scene:AddLight(AmbientLight(Color(0.05,0.05,0.05))); 
+scene:AddGeometry(CornellBox(Vector3(0,0,0), Vector3(20,20,20))); 
+scene:AddGeometry(sphere1);
+scene:AddGeometry(sphere2);
+scene:AddGeometry(sphere3);
+camera:RenderScene(scene,1); 
+--camera:VisualizePhotonMap(scene, 1000, 6);
+end
